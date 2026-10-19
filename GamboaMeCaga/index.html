@@ -1,186 +1,179 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Placer, decisiones personales y sexualidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0d24;--ink:#f1f1fa;--mut:#a9aed0;--a:#8b7bff;--b:#ff7ab8;--c:#4fd1c5;--card:rgba(255,255,255,.07)}
-*{box-sizing:border-box;margin:0}html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font:clamp(15px,1.7vw,22px)/1.5 system-ui,"Segoe UI",sans-serif}
-#bg{position:fixed;inset:0;z-index:0}
-.glow{position:fixed;inset:-20%;z-index:0;background:radial-gradient(40% 40% at 20% 30%,#4b3fd455,transparent),radial-gradient(35% 35% at 80% 70%,#ff4f9a40,transparent);animation:drift 18s ease-in-out infinite alternate}
-@keyframes drift{to{transform:translate(4%,-3%) scale(1.1)}}
-.slide{position:fixed;inset:0;z-index:1;display:none;flex-direction:column;justify-content:center;padding:6vh 8vw;gap:2vh;view-transition-name:slide}
-.slide.on{display:flex}
-h1,h2{font-weight:800;letter-spacing:-.02em;line-height:1.1}h1{font-size:clamp(34px,6vw,80px)}h2{font-size:clamp(26px,4vw,52px);background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
-.w{display:inline-block;opacity:0;transform:translateY(.6em);animation:wd .6s forwards}@keyframes wd{to{opacity:1;transform:none}}
-.who{color:var(--c);font-size:.7em;letter-spacing:.08em;text-transform:uppercase}
-p,li{max-width:62ch;color:#dfe0f5}ul{padding-left:1.1em}
-.q{font-size:1.25em;max-width:46ch;border-left:4px solid var(--b);padding-left:1em}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-.card{background:var(--card);border:1px solid #ffffff22;border-radius:18px;padding:18px;backdrop-filter:blur(8px);transition:transform .15s,box-shadow .3s;transform-style:preserve-3d;cursor:pointer;font:inherit;color:inherit;text-align:left}
-.card:hover{box-shadow:0 18px 40px #0008}.card b{color:var(--a)}.card.act{outline:2px solid var(--b)}
-.card .more{max-height:0;overflow:hidden;opacity:0;transition:.4s;color:var(--mut)}.card.act .more{max-height:200px;opacity:1;margin-top:.5em}
-.bar{height:26px;border-radius:8px;background:linear-gradient(90deg,var(--a),var(--b));transition:width .5s;min-width:3px}
-.row{display:flex;align-items:center;gap:10px;margin:6px 0}.row span{width:2.2em}
-button.btn{background:var(--a);border:0;color:#fff;padding:.5em 1em;border-radius:999px;font:inherit;cursor:pointer}
-.step{opacity:.25;transition:.4s}.step.lit{opacity:1;color:var(--c);transform:translateX(8px)}
-#hud{position:fixed;z-index:5;right:14px;top:10px;display:flex;gap:10px;font-size:.6em;color:var(--mut)}
-#hud span{background:#0007;border-radius:99px;padding:3px 10px}#hud .late{color:#ffb454}
-#prog{position:fixed;z-index:5;left:0;top:0;height:3px;background:linear-gradient(90deg,var(--a),var(--b));transition:width .4s}
-#notes{position:fixed;z-index:6;left:0;right:0;bottom:0;background:#05061aee;border-top:1px solid #fff3;padding:14px 8vw;font-size:.7em;transform:translateY(105%);transition:.35s;max-height:42vh;overflow:auto}
-#notes.show{transform:none}
-#grid{position:fixed;inset:0;z-index:7;background:#05061af0;display:none;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;padding:5vh 5vw;overflow:auto;font-size:.7em}
-#grid.show{display:grid}#grid button{background:var(--card);color:inherit;border:1px solid #fff3;border-radius:12px;padding:14px;cursor:pointer;font:inherit}
-#help{font-size:.55em;color:var(--mut);position:fixed;bottom:8px;left:14px;z-index:5}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.w{opacity:1;transform:none}}
-::view-transition-old(slide){animation:.4s ease both fo}::view-transition-new(slide){animation:.5s ease both fi}
-@keyframes fo{to{opacity:0;transform:scale(.96)}}@keyframes fi{from{opacity:0;transform:scale(1.04)}}
-
-@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
-.card{position:relative}.card::before{content:"";position:absolute;inset:0;border-radius:18px;padding:2px;background:conic-gradient(from var(--ang),var(--a),var(--b),var(--c),var(--a));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;animation:sp 4s linear infinite}
-@keyframes sp{to{--ang:360deg}}
-.slide.on .card{animation:rise .7s backwards}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.24s}.card:nth-child(4){animation-delay:.36s}.card:nth-child(5){animation-delay:.48s}.card:nth-child(6){animation-delay:.6s}
-@keyframes rise{from{opacity:0;transform:translateY(40px) rotate(-3deg) scale(.9)}}
-h2,h1{background-size:200%;animation:shim 5s linear infinite}@keyframes shim{to{background-position:200%}}
-h1{background:linear-gradient(90deg,#fff,var(--b),var(--a),#fff);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent}
-.emo{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}.emo i{position:absolute;bottom:-10%;font-style:normal;opacity:.35;animation:fl linear infinite}
-@keyframes fl{to{transform:translateY(-120vh) rotate(360deg)}}
-.tick{position:fixed;z-index:4;left:0;right:0;bottom:24px;overflow:hidden;white-space:nowrap;font-size:.6em;color:#ffffff66;border-block:1px solid #ffffff18;background:#0004}
-.tick span{display:inline-block;padding-left:100%;animation:mq 40s linear infinite}@keyframes mq{to{transform:translateX(-100%)}}
-.qrbox{display:flex;align-items:center;gap:20px;background:#fff1;border:2px dashed var(--b);border-radius:20px;padding:14px 18px;width:fit-content;animation:pu 2.5s ease-in-out infinite}
-.qrbox img{width:clamp(110px,18vw,210px);border-radius:12px;background:#fff;padding:6px}@keyframes pu{50%{box-shadow:0 0 40px var(--b)}}
-.in{background:#0006;border:1px solid var(--a);color:#fff;border-radius:99px;padding:.5em 1em;font:inherit;width:min(420px,90%)}
-.cl{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-top:10px;min-height:60px}.cl b{animation:bob 3s ease-in-out infinite alternate;font-weight:800}@keyframes bob{to{transform:translateY(-8px) rotate(3deg)}}
-.gm{display:grid;gap:12px}#gq{font-size:1.4em;min-height:3em}#gt{width:100%;transition:width 10s linear}
-.good{color:#6dffa8}.bad{color:#ff7a7a}.sc{display:flex;gap:18px;font-weight:700}
-
-:root{--bg:#0c1224;--a:#8fa8ff;--b:#e7a8c8;--c:#7fd6c8}
-.emo{display:none}.card::before{animation-duration:16s}h1,h2{animation-duration:16s}.glow{animation-duration:40s;opacity:.7}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}}
-.br{width:90px;height:90px;border-radius:50%;background:radial-gradient(var(--c),transparent 70%);animation:brth 8s ease-in-out infinite;margin:10px 0}@keyframes brth{50%{transform:scale(1.8)}}
-.qrbox{animation-duration:6s}
-
-.slide{overflow:auto}.glow{filter:hue-rotate(var(--h,0deg));transition:filter 2s}
-button:focus-visible,.in:focus-visible{outline:3px solid var(--c);outline-offset:2px}
-.stats{display:flex;gap:34px;flex-wrap:wrap}.st{max-width:260px}.st b{display:block;font-size:clamp(44px,8vw,104px);line-height:1;background:linear-gradient(90deg,var(--a),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}.st span{color:var(--mut);font-size:.65em;line-height:1.3;display:block}
-.rings{height:min(36vh,280px)}.rg{transform-box:fill-box;transform-origin:center;animation:pop .9s cubic-bezier(.2,1.4,.4,1) backwards}@keyframes pop{from{transform:scale(.2);opacity:0}}
-.tlb{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--a),var(--b),var(--c));transform-origin:left;animation:grow 2.5s ease both}@keyframes grow{from{transform:scaleX(0)}}
-#dots{position:fixed;right:14px;bottom:6px;z-index:5;display:flex;gap:6px}#dots i{width:8px;height:8px;border-radius:50%;background:#fff3;cursor:pointer;transition:.3s}#dots i.on{background:var(--c);transform:scale(1.5)}
-#sos{position:fixed;left:14px;top:10px;z-index:5;font-size:.55em;background:#ffffff18}
-#sup{position:fixed;inset:0;z-index:9;background:#050816ee;display:none;align-items:center;justify-content:center;padding:6vw}#sup.show{display:flex}#sup div{max-width:560px;background:#141a35;border:1px solid var(--c);border-radius:20px;padding:26px}
-.pl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.8em}.pl .pb{width:100%;display:flex;gap:6px;align-items:flex-end;height:50px}.pl .pb i{flex:1;background:linear-gradient(var(--a),var(--b));border-radius:6px 6px 0 0;transition:height .5s;min-height:3px}
-@media(max-width:700px){.slide{padding:7vh 6vw}.qrbox{flex-direction:column}#hud{top:34px}}
-
-h1,h2{background:none!important;color:var(--ink)!important;animation:none!important}
-h2 .w{background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
-h1 .w{color:#fff;text-shadow:0 0 28px var(--b)}
-
-.slide{padding-bottom:84px}.rings{height:min(24vh,190px)}
-.pl .pb{display:none}.pl.v .pb{display:flex}
+:root{--bg:#f3f5f8;--sf:#fff;--ink:#17223b;--mut:#51607a;--ac:#0f5c6e;--pl:#7a3b69;--ln:#d5dbe5;
+--serif:"Newsreader",Georgia,"Times New Roman",serif;--sans:"Public Sans",system-ui,"Segoe UI",Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1626;--sf:#17213a;--ink:#e9edf5;--mut:#a3b0c7;--ac:#7cc9d6;--pl:#d3a0c4;--ln:#2b3a58}}
+:root[data-theme="dark"]{--bg:#0f1626;--sf:#17213a;--ink:#e9edf5;--mut:#a3b0c7;--ac:#7cc9d6;--pl:#d3a0c4;--ln:#2b3a58}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font:400 clamp(15px,1.55vw,21px)/1.55 var(--sans)}
+.s{position:fixed;inset:0;display:none;flex-direction:column;justify-content:center;gap:2.2vh;padding:calc(6vh + env(safe-area-inset-top,0px)) 8vw calc(10vh + env(safe-area-inset-bottom,0px));overflow:auto}
+.s.on{display:flex}
+.tag{color:var(--pl);font-weight:600;font-size:.8em;letter-spacing:.02em}
+h1,h2{font-family:var(--serif);font-weight:700;line-height:1.12;letter-spacing:-.01em;max-width:22ch}
+h1{font-size:clamp(34px,6vw,76px);max-width:16ch}
+h2{font-size:clamp(28px,4.2vw,56px)}
+.sub{font-family:var(--serif);font-size:1.5em;color:var(--mut);max-width:34ch}
+.names{color:var(--mut);font-size:.9em;border-top:1px solid var(--ln);padding-top:1.4vh;width:fit-content}
+p{max-width:62ch}
+.q{font-family:var(--serif);font-size:1.45em;line-height:1.35;max-width:40ch;border-left:4px solid var(--pl);padding-left:1em}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px;margin-top:1vh}
+.c{background:var(--sf);border:1px solid var(--ln);border-top:3px solid var(--ac);border-radius:6px;padding:16px 18px;font:inherit;color:inherit;text-align:left}
+.c h3{font-family:var(--serif);font-size:1.15em;color:var(--ac);margin-bottom:.25em}
+.c p{color:var(--ink);font-size:.95em}.c p+p{margin-top:.5em}.c .l{color:var(--mut)}
+.row{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+svg{height:min(26vh,200px);width:auto}
+.o{cursor:pointer;display:flex;justify-content:space-between;gap:12px;width:100%}
+.o:hover,.o:focus-visible{border-top-color:var(--pl)}
+.o b{color:var(--pl);min-width:1.5em;text-align:right}
+:focus-visible{outline:3px solid var(--pl);outline-offset:2px}
+ul{padding-left:1.1em;max-width:70ch}li{margin:.35em 0;font-size:.95em}
+#pg{position:fixed;left:0;top:0;height:3px;background:var(--ac);z-index:5;transition:width .3s}
+#nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:flex-end;align-items:center;gap:12px;padding:10px 4vw calc(10px + env(safe-area-inset-bottom,0px));color:var(--mut);font-size:.8em;z-index:5}
+#nav button{background:var(--sf);color:var(--ink);border:1px solid var(--ln);border-radius:50%;width:38px;height:38px;font:inherit;cursor:pointer}
+#nav button:hover{border-color:var(--ac)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
-<canvas id="bg"></canvas><div class="glow"></div><div class="emo"></div><div class="tick"><span>Tu cuerpo es tuyo ✦ Decidir es un derecho ✦ Pedir ayuda es cuidarte ✦ Puedes no participar y salir cuando lo necesites ✦ Aquí se escucha sin juzgar &nbsp; ✦ &nbsp;</span></div><div id="prog"></div>
-<div id="hud"><span id="tm">00:00</span><span id="bd"></span><span id="ct"></span><span id="mt" style="cursor:pointer">🔊</span></div>
-<main id="deck"></main>
-<div id="dots"></div><button id="sos" class="btn">Necesito apoyo</button><div id="sup"><div><h2 style="font-size:1.6em">No estás solo/a</h2><p>Si este tema te afecta o vives una situación de presión o violencia, habla con orientación escolar o con un adulto de confianza.</p><p><b>México:</b> Línea de la Vida 800 911 2000 (apoyo emocional, 24 h) · Emergencias 911.</p><p><small>Agrega aquí los contactos de tu escuela y tu estado.</small></p><button class="btn" id="xs">Cerrar</button></div></div><div id="notes"></div><div id="grid"></div>
-<div id="help">← → navegar · 1-9 saltar · G índice · N notas · T reiniciar reloj · M sonido · F pantalla completa · C confeti</div>
+<div id="pg"></div>
+
+<section class="s on">
+<h1>Placer, decisiones personales y sexualidad</h1>
+<p class="sub">Conocimiento del cuerpo, límites y bienestar</p>
+<p class="names">Yeimi Melendez Pikitini · Yomali · Gamboa<br>Preparatoria Madero</p>
+</section>
+
+<section class="s">
+<p class="tag">Pregunta detonadora</p>
+<h2 style="max-width:14ch;font-size:clamp(34px,6vw,80px)">¿Quién decide sobre tu cuerpo?</h2>
+</section>
+
+<section class="s">
+<p class="tag">¿Qué es?</p><h2>Conceptos clave</h2>
+<div class="g">
+<div class="c"><h3>El placer como dimensión del bienestar</h3><p>Parte del bienestar físico, emocional y social; se vive con respeto y sin presión.</p></div>
+<div class="c"><h3>Decisiones personales</h3><p>Elecciones sobre mi cuerpo y mi proyecto de vida.</p></div>
+<div class="c"><h3>Privacidad</h3><p>Mi intimidad no se invade ni se exhibe.</p></div>
+<div class="c"><h3>Autonomía</h3><p>Decidir con información y sin coerción.</p></div>
+<div class="c"><h3>Responsabilidad</h3><p>Cuidar mi salud y la de la otra persona.</p></div>
+<div class="c"><h3>Mitos sociales sobre la sexualidad</h3><p>Creencias sin evidencia que limitan derechos.</p></div>
+<div class="c"><h3>Información confiable</h3><p>Educación basada en evidencia, que protege y permite decidir.</p></div>
+</div></section>
+
+<section class="s">
+<p class="tag">¿Por qué es importante?</p><h2>De lo personal a lo colectivo</h2>
+<div class="row">
+<svg viewBox="0 0 300 300" role="img" aria-label="Cuatro círculos concéntricos: Yo, Relaciones, Sociedad y Derechos"><g fill-opacity=".1" stroke-width="2"><circle cx="150" cy="150" r="140" fill="var(--ac)" stroke="var(--ac)"/><circle cx="150" cy="150" r="105" fill="var(--pl)" stroke="var(--pl)"/><circle cx="150" cy="150" r="70" fill="var(--ac)" stroke="var(--ac)"/><circle cx="150" cy="150" r="35" fill="var(--pl)" stroke="var(--pl)"/></g><g fill="var(--ink)" font-size="14" text-anchor="middle" font-family="sans-serif"><text x="150" y="28">Derechos</text><text x="150" y="63">Sociedad</text><text x="150" y="98">Relaciones</text><text x="150" y="155">Yo</text></g></svg>
+<p class="q">Lo íntimo también es político.</p></div>
+<div class="g">
+<div class="c"><h3>Vida cotidiana</h3><p>Menos ansiedad ante los cambios, autoimagen sana.</p></div>
+<div class="c"><h3>Relaciones con otras personas</h3><p>Comunicación asertiva y consentimiento entusiasta.</p></div>
+<div class="c"><h3>Sociedad</h3><p>Menos violencia, embarazos no planeados e ITS.</p></div>
+<div class="c"><h3>Derechos</h3><p>Autonomía corporal, privacidad, información.</p></div>
+</div></section>
+
+<section class="s">
+<p class="tag">¿Qué dice la investigación?</p><h2>Tres estudios</h2>
+<div class="g">
+<div class="c"><h3>UNESCO y otros (2018)</h3><p class="l">¿Qué nos dice?</p><p>La educación integral en sexualidad no adelanta el inicio sexual y mejora el uso de protección.</p><p class="l">¿Por qué es importante?</p><p>Hablar con información no aumenta los riesgos: los reduce.</p></div>
+<div class="c"><h3>Haberland (2015)</h3><p class="l">¿Qué nos dice?</p><p>Los programas que abordan género y poder son unas 5 veces más eficaces.</p><p class="l">¿Por qué es importante?</p><p>Para cuidarse no basta saber: hay que poder decidir sin desigualdad ni presión.</p></div>
+<div class="c"><h3>UNFPA (2021)</h3><p class="l">¿Qué nos dice?</p><p>Cerca del 45 % de las mujeres en 57 países no decide libremente sobre su salud y su sexualidad.</p><p class="l">¿Por qué es importante?</p><p>La autonomía corporal aún no está garantizada para todas las personas.</p></div>
+</div></section>
+
+<section class="s">
+<p class="tag">Problema o situación social</p><h2>No es un problema de individuos: es un problema de sistema</h2>
+<div class="g">
+<div class="c"><h3>Estereotipo</h3><p>Guiones rígidos de masculinidad y feminidad.</p></div>
+<div class="c"><h3>Discriminación</h3><p>Hostigamiento a la diversidad sexo-genérica.</p></div>
+<div class="c"><h3>Presión social</h3><p>«Si me quisieras lo harías», disfrazada de broma, amor o curiosidad.</p></div>
+<div class="c"><h3>Desigualdad</h3><p>Asimetrías de edad, dinero y género.</p></div>
+<div class="c"><h3>Falta de información</h3><p>La pornografía comercial llena el vacío.</p></div>
+<div class="c"><h3>Mitos o creencias</h3><p>El amor exige pruebas; el cuerpo no es propiedad.</p></div>
+</div></section>
+
+<section class="s">
+<p class="tag">Análisis</p><h2>Una situación para analizar</h2>
+<p class="q">Una alumna de 16 años escucha en su grupo que «la que no lo hace es rara» y que «los hombres no pueden parar». En la escuela nunca se habla del tema y ella no sabe a quién preguntar.</p>
+<div class="g">
+<div class="c"><h3>¿Cuál es el problema?</h3></div>
+<div class="c"><h3>¿Qué factores influyen?</h3></div>
+<div class="c"><h3>¿Qué podría hacerse para mejorarla?</h3></div>
+</div></section>
+
+<section class="s">
+<p class="tag">Análisis</p><h2>Respuestas al análisis</h2>
+<div class="g">
+<div class="c"><h3>¿Cuál es el problema?</h3><p>Tabuización y vacío educativo: el silencio no protege, expone.</p></div>
+<div class="c"><h3>¿Qué factores influyen?</h3><p>Socioculturales (machismo), psicológicos (culpa) e institucionales (falta de educación sexual integral).</p></div>
+<div class="c"><h3>¿Qué podría hacerse para mejorarla?</h3><p>Educación integral laica y basada en evidencia; diálogo sin juicios; servicios amigables.</p></div>
+</div></section>
+
+<section class="s">
+<p class="tag">Prevención y alternativas</p><h2>Cómo cuidarnos y a quién acudir</h2>
+<div class="g">
+<div class="c"><h3>Información confiable</h3><p>Educación basada en evidencia para decidir con conocimiento.</p></div>
+<div class="c"><h3>Consentimiento</h3><p>Un sí libre y entusiasta, que puede retirarse en cualquier momento.</p></div>
+<div class="c"><h3>Frases asertivas</h3><p>«No me siento listo/a», «Me gustaría ir más despacio», «Gracias por preguntar, hoy no».</p></div>
+<div class="c"><h3>Redes de apoyo</h3><p>Orientación escolar, un adulto de confianza y servicios confidenciales. La Ley Olimpia protege frente a la violencia digital.</p></div>
+</div></section>
+
+<section class="s">
+<p class="tag">Reflexión</p>
+<p class="q" style="font-size:1.6em;max-width:34ch">Si el placer y la sexualidad son dimensiones naturales del ser humano, ¿por qué la sociedad insiste en gestionarlos desde el miedo, la culpa y el silencio, y no desde la responsabilidad, el conocimiento y el respeto a la dignidad?</p>
+</section>
+
+<section class="s">
+<p class="tag">Importancia para el futuro</p><h2>Una base para el proyecto de vida</h2>
+<div class="g">
+<div class="c"><h3>Hoy, de 15 a 18 años</h3><p>Autoconocimiento.</p></div>
+<div class="c"><h3>Universidad y trabajo</h3><p>Límites claros.</p></div>
+<div class="c"><h3>Pareja y familia</h3><p>Relaciones igualitarias.</p></div>
+<div class="c"><h3>Ciudadanía</h3><p>Participación y derechos.</p></div>
+</div></section>
+
+<section class="s">
+<p class="tag">Actividad · Dilema</p><h2>El dilema de Sofía y Carlos</h2>
+<p>Sofía (16) y Carlos (17) llevan 4 meses de relación. Carlos dice que «si de verdad lo ama, debe demostrarlo» y esa noche le pide una foto íntima «como prueba de confianza». Sofía duda y teme que él la deje o la ridiculice.</p>
+<p class="tag">¿Qué debería hacer Sofía? Toca una opción para sumar un voto.</p>
+<div class="g" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
+<button class="c o"><span>A) Decir que sí para no perder la relación</span><b>0</b></button>
+<button class="c o"><span>B) Decir que no y mantener el límite</span><b>0</b></button>
+<button class="c o"><span>C) Pedir tiempo y hablar con Carlos</span><b>0</b></button>
+<button class="c o"><span>D) Pedir ayuda a un adulto de confianza</span><b>0</b></button>
+</div></section>
+
+<section class="s">
+<p class="tag">Conclusión</p><h2>Tres ideas que queremos dejar</h2>
+<div class="g">
+<div class="c"><h3>1</h3><p>El placer y la sexualidad son dimensiones legítimas del bienestar integral.</p></div>
+<div class="c"><h3>2</h3><p>La autonomía y el consentimiento son innegociables.</p></div>
+<div class="c"><h3>3</h3><p>La información científica es protección.</p></div>
+</div></section>
+
+<section class="s">
+<p class="tag">Fuentes</p><h2>Fuentes</h2>
+<ul>
+<li>UNESCO et al. (2018). Orientaciones técnicas internacionales sobre educación en sexualidad.</li>
+<li>UNFPA (2021). Estado de la población mundial: Mi cuerpo me pertenece.</li>
+<li>Haberland, N. (2015). International Perspectives on Sexual and Reproductive Health, 41(1).</li>
+<li>OMS (2006). Defining sexual health.</li>
+<li>WAS (2014). Declaración de los Derechos Sexuales.</li>
+<li>Constitución Política de los Estados Unidos Mexicanos, arts. 4 y 16.</li>
+</ul></section>
+
+<div id="nav"><span id="ct"></span><button id="pv" aria-label="Anterior">‹</button><button id="nx" aria-label="Siguiente">›</button></div>
 <script>
-const $=(s,r=document)=>r.querySelector(s);
-const S=[
-{t:"Placer, decisiones personales y sexualidad",who:"Yeimi · 2 min",min:2,k:"cloud",x:"Conocimiento del cuerpo, límites y bienestar<br><small>Yeimi Melendez Pikitini · Yomali · Gamboa — Preparatoria Madero</small><div class='qrbox'><img src='qr.png' alt='Código QR del cuestionario'><div><b>Cuestionario de una única pregunta</b><br>¿Qué piensas al oír «sexualidad»?<br><small>Escanea el QR y responde. Las palabras aparecen aquí abajo ↓</small></div></div>",n:"Abrir nube de palabras 20 s. Guardar captura para comparar en la slide 12. Regla de convivencia: se puede dudar y discrepar; no se puede burlar ni juzgar."},
-{t:"Acuerdos de cuidado",who:"Yeimi · 1 min",min:1,k:"cards",items:[["Respeto","Se critican ideas, nunca personas."],["Participación voluntaria","Nadie está obligado a hablar ni a votar."],["Puedes salir","Sin dar explicaciones, cuando lo necesites."],["Confidencialidad","Lo que se comparte aquí no se repite fuera."],["Apoyo","Orientación escolar o un adulto de confianza."]],x:"<p>Este tema puede tocar experiencias personales. Cuidarnos es parte de la actividad.</p>",n:"Leer los acuerdos con calma. No se piden experiencias personales; se puede pedir ayuda al terminar."},
-{t:"¿Quién decide sobre tu cuerpo?",who:"Yeimi · 2 min",min:2,x:"<p class='q'>¿Hasta qué punto conocer nuestro cuerpo y aprender a poner límites influye en nuestra seguridad, autoestima y bienestar, y nos permite ejercer la autonomía con responsabilidad ante la presión social?</p>",n:"Desarmar la pregunta en tres ideas: conocimiento, límites, autonomía. Kant: darse uno mismo la ley. Nadie es autónomo sobre lo que desconoce. Mano alzada: ¿quién aprendió primero de un video o amigo?"},
-{t:"Conceptos clave",who:"Yeimi y Yomali · 6 min",min:6,k:"wheel",n:"Placer: dimensión del bienestar según OMS, requiere consentimiento. Decisiones y privacidad: arts. 4 y 16 constitucionales. Autonomía sin responsabilidad es egoísmo; responsabilidad sin autonomía es obediencia. Yomali: mitos (virginidad, placer femenino, «los hombres no pueden parar») y regla de 3 preguntas: ¿quién lo dice?, ¿qué evidencia?, ¿qué gana?"},
-{t:"Conversemos: ¿mito o realidad?",who:"Yomali · 4 min",min:4,k:"game",n:"Yomali lee cada afirmación y el grupo responde a mano alzada o con tarjetas; quien expone pulsa la respuesta mayoritaria. Sin puntos ni presión de tiempo: leer la explicación y dar espacio a las dudas. Tras cada respuesta, leer la explicación en voz alta."},
-{t:"¿Por qué importa?",who:"Yeimi · 3 min",min:3,pulse:"¿Qué tan seguro/a te sientes de poder decir no? (1 = nada, 5 = totalmente)",k:"cards",items:[["Vida cotidiana","Menos ansiedad ante los cambios, autoimagen sana."],["Relaciones","Comunicación asertiva y consentimiento entusiasta."],["Sociedad","Menos violencia, embarazos no planeados e ITS."],["Derechos","Autonomía corporal, privacidad, información."]],x:"<svg class='rings' viewBox='0 0 300 300'><g fill='none' stroke-width='2'><circle class='rg' cx='150' cy='150' r='140' fill='#8fa8ff22' stroke='#8fa8ff' style='animation-delay:.9s'/><circle class='rg' cx='150' cy='150' r='105' fill='#e7a8c822' stroke='#e7a8c8' style='animation-delay:.6s'/><circle class='rg' cx='150' cy='150' r='70' fill='#7fd6c822' stroke='#7fd6c8' style='animation-delay:.3s'/><circle class='rg' cx='150' cy='150' r='35' fill='#ffffff33' stroke='#fff'/></g><g fill='#fff' font-size='13' text-anchor='middle'><text x='150' y='28'>Derechos</text><text x='150' y='63'>Sociedad</text><text x='150' y='98'>Relaciones</text><text x='150' y='154'>Yo</text></g></svg><p class='q'>Lo íntimo también es político.</p>",n:"Cuatro círculos de lo cercano a lo amplio. Escala 1-5: ¿qué tan seguro/a te sientes de decir no? Comentar tendencia sin señalar a nadie."},
-{t:"¿Qué dice la evidencia?",who:"Yomali · 4 min",min:4,x:"<div class='stats'><div class='st'><b data-n='45' data-s='%'>0</b><span>de mujeres en 57 países no decide libremente sobre su salud (UNFPA, 2021)</span></div><div class='st'><b data-n='5' data-s='×'>0</b><span>más eficaces los programas que abordan género y poder (Haberland, 2015)</span></div><div class='st'><b>0</b><span>programas integrales que adelantaron el inicio sexual (Kirby, 2007)</span></div></div>",k:"cards",items:[["UNESCO + OMS y otros (2018)","Revisión de programas: la educación sexual integral no adelanta el inicio sexual y mejora el uso de protección."],["Kirby (2007) y Haberland (2015)","Programas con enfoque de género y poder: 5 veces más eficaces."],["UNFPA (2021)","≈45% de mujeres en 57 países no decide libremente sobre su salud y sexualidad."]],n:"Método → hallazgo → por qué importa hoy. Verificar cifras con los originales antes de exponer. Cierre: la información protege, el silencio expone, la desigualdad condiciona."},
-{t:"Problema y situación social",who:"Yomali · 3 min",min:3,k:"cards",items:[["Estereotipos","Guiones rígidos de masculinidad y feminidad."],["Discriminación","Hostigamiento a la diversidad sexo-genérica."],["Presión social","«Si me quisieras lo harías».","Disfrazada de broma, amor o curiosidad."],["Desigualdad","Asimetrías de edad, dinero, género."],["Falta de información","La pornografía comercial llena el vacío."],["Mitos","El amor exige pruebas; el cuerpo no es propiedad."]],x:"<p class='q'>No es un problema de individuos: es un problema de sistema.</p>",n:"Los seis factores se retroalimentan. Encuesta anónima: ¿qué presión has visto más cerca?"},
-{t:"Análisis crítico",who:"Yomali · Yeimi · Gamboa · 3 min",min:3,k:"cards",items:[["1 · Problema raíz","Tabuización y vacío educativo: el silencio no protege, expone."],["2 · Factores","Socioculturales (machismo), psicológicos (culpa), institucionales (sin ESI)."],["3 · Qué hacer","Educación integral laica y basada en evidencia; diálogo sin juicios; servicios amigables."]],n:"Un minuto por pregunta. Padlet: «Una acción concreta para nuestra escuela», 1 minuto."},
-{t:"Prevención y alternativas",who:"Gamboa · 3 min",min:3,k:"ladder",n:"Consentimiento dinámico: libre, informado, entusiasta, específico, reversible. Frases: «No me siento listo/a», «Me gustaría ir más despacio», «Gracias por preguntar, hoy no». Redes de apoyo confidenciales y Ley Olimpia. Mostrar QR del directorio de ayuda."},
-{t:"Reflexión profunda",who:"Yeimi · 2 min",min:2,x:"<p class='q'>Si el placer y la sexualidad son dimensiones naturales del ser humano, ¿por qué la sociedad insiste en gestionarlos desde el miedo, la culpa y el silencio, y no desde la responsabilidad, el conocimiento y el respeto a la dignidad?</p><p>Pausa de 10 segundos. Silencio. Respira.</p><div class='br'></div>",n:"No juzgar a familias ni maestros: lo aprendido fue una herencia, no una verdad absoluta. La pregunta es qué hago yo con lo que recibí."},
-{t:"Trascendencia futura",who:"Gamboa · 2 min",min:2,x:"<div class='tlb'></div>",pulse:"¿Qué tan importante es saber poner límites para tu proyecto de vida? (1-5)",k:"cards",items:[["Hoy 15-18","Autoconocimiento"],["Universidad / trabajo","Límites claros"],["Pareja y familia","Relaciones igualitarias"],["Ciudadanía","Participación y derechos"]],n:"El bienestar sexual es parte del proyecto de vida. Escala Slido 1-5 sobre importancia de poner límites; puente a la actividad."},
-{t:"El dilema de Sofía y Carlos",who:"Gamboa · 11 min",min:11,k:"vote",x:"<p>Sofía (16) y Carlos (17) llevan 4 meses. Carlos dice que «si de verdad lo ama, debe demostrarlo» y esa noche le pide una foto íntima «como prueba de confianza». Sofía duda y teme que él la deje o la ridiculice.</p>",n:"0:00 caso · 1:30 voto inicial · 3:00 preguntas guía: presión, mito romántico, frases asertivas, foto íntima y Ley Olimpia · 6:00 plenaria · 9:00 voto final · 10:00 cierre. Si alguien comparte violencia: escuchar, no exponer, canalizar a orientación."},
-{t:"Conclusión",who:"Gamboa · 2 min",min:2,k:"close",x:"<div class='grid'><div class='card'><b>1</b><br>El placer y la sexualidad son dimensiones legítimas del bienestar integral.</div><div class='card'><b>2</b><br>La autonomía y el consentimiento son innegociables.</div><div class='card'><b>3</b><br>La información científica es protección.</div></div><p class='q'>¿Qué debería cambiar en mi manera de pensar y de actuar después de conocer este tema?</p>",n:"Repetir la nube de palabras de la slide 1 y comparar. Yomali: educar no adelanta nada. Yeimi: nadie es libre de elegir lo que ignora."},
-{t:"Fuentes",who:"Equipo · 1 min",min:1,x:"<ul style='font-size:.7em'><li>UNESCO et al. (2018). Orientaciones técnicas internacionales sobre educación en sexualidad.</li><li>UNFPA (2021). Estado de la población mundial: Mi cuerpo me pertenece.</li><li>OMS (2006). Defining sexual health.</li><li>Kirby, D. (2007). Emerging Answers 2007.</li><li>Haberland, N. (2015). Int. Perspectives on Sexual and Reproductive Health, 41(1).</li><li>WAS (2014). Declaración de los Derechos Sexuales.</li><li>CPEUM arts. 4 y 16; LGDNNA. INEGI/ENADID (verificar título).</li></ul>",n:"Gracias. Atender preguntas."}
-];
-const WHEEL=[["Placer","Dimensión del bienestar físico, emocional y social."],["Decisiones","Elecciones sobre mi cuerpo y proyecto de vida."],["Privacidad","Mi intimidad no se invade ni se exhibe."],["Autonomía","Decidir con información y sin coerción."],["Responsabilidad","Cuidar mi salud y la de la otra persona."],["Mitos","Creencias sin evidencia que limitan derechos."],["Información","Educación basada en evidencia."]];
-const LAD=["Libre","Informado","Entusiasta","Específico","Reversible"];
-const OPT=["A) Decir que sí para no perder la relación","B) Decir que no y mantener el límite","C) Pedir tiempo y hablar con Carlos","D) Pedir ayuda a un adulto de confianza"];
-let cur=0,t0=Date.now(),muted=false,AC,amb;const votes={ini:[0,0,0,0],fin:[0,0,0,0]};let phase="ini";
-/* audio sintetizado (sin archivos) */
-function ac(){return AC||(AC=new(window.AudioContext||window.webkitAudioContext)())}
-function tone(f,d=.25,ty="sine",v=.08,at=0){if(muted)return;const c=ac(),o=c.createOscillator(),g=c.createGain();o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime+at);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+at+d);o.connect(g).connect(c.destination);o.start(c.currentTime+at);o.stop(c.currentTime+at+d)}
-function whoosh(){if(muted)return;const c=ac(),b=c.createBuffer(1,c.sampleRate*.4,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=b;f.type="bandpass";f.frequency.setValueAtTime(400,c.currentTime);f.frequency.exponentialRampToValueAtTime(3000,c.currentTime+.35);g.gain.value=.02;s.connect(f).connect(g).connect(c.destination);s.start()}
-const chime=()=>[392,494,587].forEach((f,i)=>tone(f,.9,"sine",.04,i*.18));
-function ambient(){if(amb||muted)return;const c=ac();amb=[110,165,220].map((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.frequency.value=f;o.type="sine";g.gain.value=.012;o.connect(g).connect(c.destination);o.start();return o})}
-function setMute(m){muted=m;$("#mt").textContent=m?"🔇":"🔊";if(m&&amb){amb.forEach(o=>o.stop());amb=null}else if(!m)ambient()}
-/* render */
-const deck=$("#deck");
-S.forEach((s,i)=>{const e=document.createElement("section");e.className="slide";let h=`<div class="who">${s.who}</div><${i?"h2":"h1"}>${s.t.split(" ").map((w,j)=>`<span class="w" style="animation-delay:${j*.07}s">${w}</span>`).join(" ")}</${i?"h2":"h1"}>`;
-if(s.x)h+=`<div>${s.x}</div>`;if(s.pulse)h+=pulseUI(i,s.pulse);
-if(s.k=="cards")h+=`<div class="grid">${s.items.map(c=>`<button class="card"><b>${c[0]}</b><div>${c[1]}</div>${c[2]?`<div class="more">${c[2]}</div>`:""}</button>`).join("")}</div>`;
-if(s.k=="wheel")h+=`<div class="grid">${WHEEL.map(c=>`<button class="card"><b>${c[0]}</b><div class="more">${c[1]}</div></button>`).join("")}</div><p class="q">Autonomía sin responsabilidad es egoísmo; responsabilidad sin autonomía es obediencia.</p>`;
-if(s.k=="ladder")h+=`<p>Haz clic en cada peldaño: el consentimiento es un proceso, no una firma.</p><div id="lad">${LAD.map(c=>`<div class="card step">${c}</div>`).join("")}</div>`;
-if(s.k=="vote")h+=`<div><button class="btn" id="ph">Fase: voto inicial (clic para cambiar)</button> <button class="btn" id="cd" style="background:var(--b)">⏱ Reflexión: 3:00</button> <small>Toca una opción por cada voto.</small><div id="opts">${OPT.map((o,j)=>`<div class="row"><button class="card" data-o="${j}" style="flex:0 0 55%">${o}</button><div class="bar" id="b${j}" style="width:3px"></div><span id="n${j}">0</span></div>`).join("")}</div></div>`;
-if(s.k=="cloud")h+=cloudUI(0,"Escribe una palabra y presiona Enter");if(s.k=="game")h+=`<div class="gm"><div class="sc"><span id="s0"></span><span id="sk"></span></div><div id="gq" class="q"></div><div><button class="btn" data-g="0">Mito</button> <button class="btn" data-g="1">Realidad</button> <button class="btn" data-g="r" style="background:#555">↺</button></div><div id="gf"></div></div>`;if(s.k=="close")h+=cloudUI(1,"Una palabra nueva y Enter")+`<small>Antes:</small><div class="cl" data-c="0"></div>`+`<button class="btn" onclick="confetti()" style="align-self:flex-start">Cierre en calma</button>`;
-e.innerHTML=h;deck.appendChild(e)});
-const sl=[...document.querySelectorAll(".slide")];
-function go(i,snd=true){i=Math.max(0,Math.min(S.length-1,i));const f=()=>{sl[cur].classList.remove("on");cur=i;sl[cur].classList.add("on");sl[cur].querySelectorAll(".w").forEach(w=>{w.style.animation="none";void w.offsetWidth;w.style.animation=""});upd();countUp();document.documentElement.style.setProperty("--h",cur*14+"deg");if(S[cur].k=="game")gInit();renderCloud()};
-document.startViewTransition?document.startViewTransition(f):f();if(snd)whoosh();ambient();if(i==S.length-2||S[i].k=="close")setTimeout(confetti,600)}
-function upd(){$("#prog").style.width=(cur+1)/S.length*100+"%";$("#ct").textContent=`${cur+1}/${S.length}`;$("#notes").innerHTML=`<b>${S[cur].t}</b> — ${S[cur].who}<br>${S[cur].n}<br><small>Siguiente: ${S[cur+1]?S[cur+1].t:"—"}</small>`;
-const plan=S.slice(0,cur).reduce((a,s)=>a+s.min,0);$("#bd").textContent=`plan ${plan}:00 · slide ${S[cur].min} min`}
-setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000),plan=S.slice(0,cur+1).reduce((a,s)=>a+s.min,0)*60;$("#tm").textContent=String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0");$("#tm").className=s>plan+60?"late":"";if(s==plan+60)tone(330,.8,"sine",.03)},1000);
-/* interacciones */
-document.addEventListener("click",e=>{const c=e.target.closest(".card");if(c&&!c.dataset.o&&!c.classList.contains("step")){c.classList.toggle("act");tone(660,.15,"triangle")}
-if(c&&c.classList.contains("step")){c.classList.add("lit");tone(440+120*[...c.parentNode.children].indexOf(c),.3,"triangle");if(!$$(".step:not(.lit)").length){chime();confetti()}}
-if(c&&c.dataset.o!==undefined){votes[phase][c.dataset.o]++;tone(520,.1);draw()}
-if(e.target.id=="ph"){phase=phase=="ini"?"fin":"ini";e.target.textContent=phase=="ini"?"Fase: voto inicial (clic para cambiar)":"Fase: voto FINAL (clic para cambiar)";draw();if(phase=="fin")chime()}
-if(e.target.id=="mt")setMute(!muted)});
-const $$=s=>[...document.querySelectorAll(s)];
-function draw(){const v=votes[phase],m=Math.max(1,...v);v.forEach((n,j)=>{$("#b"+j).style.width=Math.max(3,n/m*35)+"vw";$("#n"+j).textContent=n})}
-/* tilt 3D */
-document.addEventListener("mousemove",e=>{const c=e.target.closest&&e.target.closest(".card");if(c){const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(600px) rotateY(${x*12}deg) rotateX(${-y*12}deg)`}});
-document.addEventListener("mouseout",e=>{const c=e.target.closest&&e.target.closest(".card");if(c)c.style.transform=""});
-/* teclado */
-document.addEventListener("keydown",e=>{if(e.target.tagName=="INPUT")return;const k=e.key.toLowerCase();if(["arrowright"," ","pagedown"].includes(k))go(cur+1);else if(["arrowleft","pageup"].includes(k))go(cur-1);else if(k=="home")go(0);else if(k=="end")go(S.length-1);else if(/^[1-9]$/.test(k))go(+k-1);
-else if(k=="n")$("#notes").classList.toggle("show");else if(k=="g"||k=="escape")$("#grid").classList.toggle("show",k=="g"&&!$("#grid").classList.contains("show"));
-else if(k=="t")t0=Date.now();else if(k=="m")setMute(!muted);else if(k=="c")confetti();else if(k=="f")document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()});
-$("#grid").innerHTML=S.map((s,i)=>`<button data-i="${i}">${i+1}. ${s.t}<br><small>${s.who}</small></button>`).join("");
-$("#grid").onclick=e=>{const b=e.target.closest("button");if(b){$("#grid").classList.remove("show");go(+b.dataset.i)}};
-let x0;document.addEventListener("touchstart",e=>x0=e.touches[0].clientX);document.addEventListener("touchend",e=>{const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(cur+(d<0?1:-1))});
-/* partículas + confeti */
-const cv=$("#bg"),cx=cv.getContext("2d");let W,H,P=[],M={x:-1e3,y:-1e3},CF=[];
-function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener("resize",rs);
-for(let i=0;i<70;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:Math.random()-.5,vy:Math.random()-.5});
-addEventListener("mousemove",e=>{M.x=e.clientX;M.y=e.clientY;for(let i=0;i<2;i++)CF.push({x:e.clientX,y:e.clientY,vx:(Math.random()-.5)*2,vy:(Math.random()-.5)*2-1,c:`hsla(${200+Date.now()/40%80},60%,80%,.6)`,l:28})});
-function confetti(){tone(392,1.2,"sine",.04);tone(587,1.6,"sine",.03,.3);for(let i=0;i<60;i++)CF.push({x:Math.random()*W,y:H+10,vx:(Math.random()-.5)*.6,vy:-Math.random()*2-.6,c:`hsla(${190+Math.random()*80},70%,80%,.7)`,l:260,g:1})}
-(function loop(){cx.clearRect(0,0,W,H);const rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
-P.forEach(p=>{if(!rm){const dx=M.x-p.x,dy=M.y-p.y,d=Math.hypot(dx,dy);if(d<160){p.vx+=dx/d*.02;p.vy+=dy/d*.02}p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H;p.vx*=.99;p.vy*=.99}cx.fillStyle="#b9b2ff88";cx.beginPath();cx.arc(p.x,p.y,1.8,0,7);cx.fill()});
-CF=CF.filter(c=>c.l-->0);CF.forEach(c=>{c.x+=c.vx;c.y+=c.vy;c.vy+=c.g?-.002:.4;cx.fillStyle=c.c;cx.fillRect(c.x,c.y,6,9)});requestAnimationFrame(loop)})();
-
-/* nube de palabras, juego y cuenta regresiva */
-const WORDS=[[],[]];
-function cloudUI(n,ph){return `<div><input class="in" data-c="${n}" placeholder="${ph}"><div class="cl" data-c="${n}" aria-live="polite"></div></div>`}
-function renderCloud(){document.querySelectorAll(".cl").forEach(el=>{const c=+el.dataset.c,m={};WORDS[c].forEach(w=>m[w]=(m[w]||0)+1);el.innerHTML=Object.entries(m).map(([w,n],i)=>`<b style="font-size:${1+n*.5}em;color:hsl(${(w.length*47+i*60)%360},90%,70%);animation-delay:${i*.2}s">${w.replace(/</g,"&lt;")}</b>`).join("")})}
-document.addEventListener("keydown",e=>{if(e.target.classList.contains("in")&&e.key=="Enter"&&e.target.value.trim()){WORDS[+e.target.dataset.c].push(e.target.value.trim().toLowerCase().slice(0,24));try{localStorage.pls=JSON.stringify(WORDS)}catch(x){}e.target.value="";tone(700+Math.random()*400,.2,"triangle");renderCloud();if(WORDS[1].length==3)confetti()}});
-document.addEventListener("keydown",e=>{if(e.target.classList.contains("in")&&e.key=="Delete"&&!e.target.value){WORDS[+e.target.dataset.c].pop();try{localStorage.pls=JSON.stringify(WORDS)}catch(x){}renderCloud()}});
-try{const w=JSON.parse(localStorage.pls);WORDS[0]=w[0]||[];WORDS[1]=w[1]||[]}catch(e){}
-const MY=[["La virginidad define el valor de una persona",0,"Mito: el valor de alguien no depende de su historia sexual."],["El placer es parte de la salud sexual",1,"Realidad: la OMS lo incluye en el bienestar sexual."],["Hablar de educación sexual adelanta el inicio sexual",0,"Mito: la evidencia muestra que no lo adelanta y mejora la protección."],["Un «sí» puede retirarse en cualquier momento",1,"Realidad: el consentimiento es reversible."],["Si no dijo «no», entonces aceptó",0,"Mito: se necesita un sí libre y entusiasta."],["Los hombres no pueden parar",0,"Mito: el autocontrol y el respeto no dependen del género."],["La pornografía comercial es educación sexual",0,"Mito: es ficción producida para vender."],["Pedir ayuda confidencial es autocuidado",1,"Realidad: es una decisión responsable."]];
-let G={i:0,s:[0,0],k:0,tm:null,on:false};
-function gInit(){G={i:0,s:[0,0],k:0,tm:null,on:true};gShow()}
-function gShow(){clearTimeout(G.tm);const q=MY[G.i];if(!q){const w="Puntaje final del grupo: "+G.s[0]+" puntos";$("#gq").textContent="Gracias por cuestionar lo aprendido.";$("#gf").textContent="Pulsa ↺ para jugar otra vez";confetti();return}
-$("#gq").textContent=`Afirmación ${G.i+1} de ${MY.length}: «${q[0]}»`;$("#gf").textContent="";$("#s0").textContent="Sin puntos ni competencia: lo importante es conversar.";
-}
-function gAns(v){if(!G.on)return;const q=MY[G.i];clearTimeout(G.tm);const ok=v==q[1];if(ok){G.s[0]+=10+G.k*2;G.k++;tone(660,.15,"triangle");tone(990,.2,"triangle",.07,.12)}else{G.k=0;tone(330,.5,"sine",.04)}
-$("#gf").innerHTML=`<span class="${ok?"good":"bad"}">${ok?"Coincide con la evidencia.":"Revisémoslo juntos."}</span> ${q[2]}`;$("#s0").textContent="Sin puntos ni competencia: lo importante es conversar.";G.i++;setTimeout(gShow,7000)}
-document.addEventListener("click",e=>{const g=e.target.dataset&&e.target.dataset.g;if(g==="r")gInit();else if(g!==undefined&&g!=="")gAns(+g);
-if(e.target.id=="cd"){let t=180;const b=e.target,iv=setInterval(()=>{t--;b.textContent="⏱ "+(t/60|0)+":"+String(t%60).padStart(2,"0");if(t<=10)tone(660,.15,"sine",.03);if(t<=0){clearInterval(iv);chime();confetti();b.textContent="⏱ Gracias. Compartamos en voz alta, quien lo desee"}},1000)}});
-const EM=document.querySelector(".emo");"🔒💬🧠❤️🛡️✨🌈🗣️".split(/(?:)/u).filter(x=>x.trim()).forEach((x,i)=>{for(let j=0;j<2;j++){const s=document.createElement("i");s.textContent=x;s.style.cssText=`left:${(i*13+j*47)%95}%;font-size:${20+(i*7)%30}px;animation-duration:${18+(i*5+j*9)%20}s;animation-delay:-${(i*3+j*7)%20}s`;EM.appendChild(s)}});
-
-function countUp(){document.querySelectorAll(".slide.on [data-n]").forEach(el=>{const n=+el.dataset.n,t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1600);el.textContent=Math.round(n*(1-Math.pow(1-p,3)))+(el.dataset.s||"");if(p<1)requestAnimationFrame(f)})(t0)})}
-function pulseUI(id,q){(window.PUL=window.PUL||{})[id]=[0,0,0,0,0];return `<div class="pl" data-p="${id}"><b>${q}</b>${[1,2,3,4,5].map(n=>`<button class="btn" data-pv="${n}">${n}</button>`).join("")}<div class="pb">${"<i></i>".repeat(5)}</div></div>`}
-document.addEventListener("click",e=>{const v=e.target.dataset&&e.target.dataset.pv;if(v){const p=e.target.closest(".pl"),a=window.PUL[p.dataset.p];p.classList.add("v");a[v-1]++;const m=Math.max(...a);p.querySelectorAll(".pb i").forEach((b,i)=>b.style.height=Math.max(3,a[i]/m*100)+"%");tone(440+v*60,.25,"sine",.04)}
-if(e.target.id=="sos")$("#sup").classList.add("show");if(e.target.id=="xs"||e.target.id=="sup")$("#sup").classList.remove("show")});
-addEventListener("keydown",e=>{if(e.key=="Escape")$("#sup").classList.remove("show")});
-$("#dots").innerHTML=S.map((s,i)=>`<i data-d="${i}" title="${s.t}"></i>`).join("");$("#dots").onclick=e=>{if(e.target.dataset.d)go(+e.target.dataset.d)};
-const _u=upd;upd=function(){_u();document.querySelectorAll("#dots i").forEach((d,i)=>d.classList.toggle("on",i==cur))};
-go(0,false);
+const S=[...document.querySelectorAll('.s')];let i=0;
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((e,k)=>e.classList.toggle('on',k==i));S[i].scrollTop=0;
+document.getElementById('ct').textContent=(i+1)+' / '+S.length;document.getElementById('pg').style.width=(i+1)/S.length*100+'%'}
+document.getElementById('pv').onclick=()=>go(i-1);document.getElementById('nx').onclick=()=>go(i+1);
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}else if(['ArrowLeft','PageUp'].includes(e.key))go(i-1);else if(e.key=='Home')go(0);else if(e.key=='End')go(S.length-1)});
+let x0;addEventListener('touchstart',e=>x0=e.touches[0].clientX);addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(i+(d<0?1:-1))});
+document.addEventListener('click',e=>{const o=e.target.closest('.o');if(o){const b=o.querySelector('b');b.textContent=+b.textContent+1}});
+go(0);
 </script></body></html>
